@@ -9,6 +9,19 @@
     
     <dt>Porcentagem de desconto</dt>
     <dd><%= number_to_percentage promotion.discount_rate, precision: 2, separator: ',' %></dd>
+
+    <dt>Código</dt>
+    <dd><%= promotion.code %></dd>
+
+    <dt>Data de validade</dt>
+    <dd><%= promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
+
+    <dt>Quantidade de cupom</dt>
+    <dd><%= promotion.coupon_quantity %></dd>
     <hr>
   <% end %>
+
 </dl>
+
+<%= link_to 'Cyber Monday', promotions_path %>
+
