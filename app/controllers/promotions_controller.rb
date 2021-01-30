@@ -11,20 +11,31 @@ class PromotionsController < ApplicationController
   end
 
   def new
-
+    @promotion = Promotion.new
   end
   def create
     @promotion = Promotion.new
 
-    @promotion.name = params[:promotion][:name]
-    @promotion.description = params[:promotion][:description]
-    @promotion.code = params[:promotion][:code]
-    @promotion.discount_rate = params[:promotion][:discount_rate]
-    @promotion.coupon_quantity = params[:promotion][:coupon_quantity]
-    @promotion.expiration_date = params[:promotion][:expiration_date]
+    # Strong Parameters abaixo
+    promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
 
-    @promotion.save
+    # Melhorar este código com parâmetros fortes, está no guia rails 
+    # @promotion.name = params[:promotion][:name]
+    # @promotion.description = params[:promotion][:description]
+    # @promotion.code = params[:promotion][:code]
+    # @promotion.discount_rate = params[:promotion][:discount_rate]
+    # @promotion.coupon_quantity = params[:promotion][:coupon_quantity]
+    # @promotion.expiration_date = params[:promotion][:expiration_date]
 
-    redirect_to promotion_path(id: @promotion.id)
+    @promotion = Promotion.new(promotion_params)
+    if @promotion.save
+      # Save faz 2 coisas
+      #   1º - Executa todas validações configuradas no model
+      #   2º - Envia um comando SQL pro banco de dados e faz o INSERT
+      #   Se tudo Ok -> true
+      redirect_to @promotion
+    else
+       render 'new'
+    end
   end
 end
