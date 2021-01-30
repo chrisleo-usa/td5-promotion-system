@@ -2,11 +2,6 @@
 pt-BR:
   activerecord:
     errors:
-      models: 
-        user: 
-          attributes:
-            user: 
-              name: 'Nome'
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:

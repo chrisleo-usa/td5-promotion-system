@@ -14,8 +14,6 @@ class PromotionsController < ApplicationController
     @promotion = Promotion.new
   end
   def create
-    @promotion = Promotion.new
-
     # Strong Parameters abaixo
     promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
 
@@ -35,7 +33,7 @@ class PromotionsController < ApplicationController
       #   Se tudo Ok -> true
       redirect_to @promotion
     else
-       render 'new'
+      render 'new'
     end
   end
 end
