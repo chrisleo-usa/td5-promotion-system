@@ -13,6 +13,7 @@ class PromotionsController < ApplicationController
   def new
     @promotion = Promotion.new
   end
+
   def create
     # Strong Parameters abaixo
     promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
@@ -35,5 +36,16 @@ class PromotionsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def generate_coupons
+    @promotion = Promotion.find(params[:id])
+
+    (1..@promotion.coupon_quantity).each do |number|
+      Coupon.create!(code: "#{@promotion.code}-#{'%04d' % number}", promotion: @promotion)
+    end
+    
+    flash[:notice] = 'Cupons gerados com sucesso'
+    redirect_to @promotion
   end
 end
