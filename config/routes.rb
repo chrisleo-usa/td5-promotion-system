@@ -5,6 +5,6 @@ Rails.application.routes.draw do
     post 'generate_coupons', on: :member  #mesma coisa do código abaixo, mas este é o jeito Padrão
   end
 
-  resources :categories, only: [:index, :new]
+  resources :categories, only: [:index, :new, :create, :show]
   # post '/promotions/:id/generate', to: 'promotions#generate_coupons'
 end
