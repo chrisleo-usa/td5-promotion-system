@@ -44,4 +44,38 @@ describe Promotion do
       expect(promotion.errors[:code]).to include('já está em uso')
     end
   end
+
+  # context é um alias para describe. context fala que todos os scenários fazem parte deste contexto
+  # com # quer dizer que é metodo de instância. Com ponto (.) é método de 
+  context '#generate_coupons!' do 
+    it 'generate coupons of coupon_quantity' do
+      promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+
+      promotion.generate_coupons!
+
+      expect(promotion.coupons.size).to eq 100
+      codes = promotion.coupons.pluck(:code)
+      expect(codes).to include('NATAL10-0001')
+      expect(codes).to include('NATAL10-0100')
+      expect(codes).not_to include('NATAL10-0000')
+      expect(codes).not_to include('NATAL10-0101')
+      # método pluck retornar um array de strings, neste teste estamos testando se nos cupons inclui NATAL10-...
+    end
+
+    it 'do not generate if error' do
+      promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+
+      promotion.coupons.create!(code: 'NATAL10-0030')
+
+      expect { promotion.generate_coupons! }.to raise_error(ActiveRecord::RecordNotUnique)
+
+      expect(promotion.coupons.reload.size).to eq 1
+      
+
+    end
+  end
 end
