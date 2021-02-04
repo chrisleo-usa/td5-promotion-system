@@ -6,7 +6,7 @@ feature 'Admin view promotions' do
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
                       expiration_date: '22/12/2033')
-    # create!(exclamação chamamos de bang) se der errado, ele irá mostrar um erro, já só o create não apresentará nenhum erro. create! é importante durante os testes. 
+    # create!(exclamação chamamos de bang) se der errado, ele irá mostrar um erro, já só o create não apresentará nenhum erro. create! é importante durante os testes pois ele trava a aplicação em caso de erro. 
     Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                       description: 'Promoção de Cyber Monday',
                       code: 'CYBER15', discount_rate: 15,

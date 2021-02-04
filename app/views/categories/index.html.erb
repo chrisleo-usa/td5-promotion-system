@@ -2,10 +2,17 @@
 
 <%= link_to 'Cadastrar categoria', new_category_path%>
 
-<h3>Categorias listadas</h3>
-<%= @categories.each do |category| %>
-  <dl>
-    <dt>Nome</dt>
-    <dd><%= link_to category.name, category_path(category.id) %></dd>
-  </dl>
-<% end %>
+<%  if @categories.empty? %>
+  <div class="warning">Nenhuma categoria cadastrada</div>
+<% else%>
+  <h3>Categorias listadas</h3>
+
+  <% @categories.each do |category| %>
+    <dl>
+      <dt>Nome</dt>
+      <dd><%= link_to category.name, category_path(category.id) %></dd>
+    </dl>
+  <% end %>
+<% end%>
+
+<%= link_to 'Voltar', root_path %>

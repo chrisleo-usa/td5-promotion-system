@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin registers a product category' do
+feature 'Admin registers a category' do
   scenario 'from index page' do
     visit root_path
     click_on 'Categorias'
@@ -22,28 +22,4 @@ feature 'Admin registers a product category' do
     expect(page).to have_content('TEC15')
 
   end
-
-  scenario 'and view details' do
-    category = Category.create!(name: 'Tecnologia', code: 'TEC15')
-
-    visit root_path
-    click_on 'Categorias'
-    click_on category.name
-
-    expect(page).to have_content('Tecnologia')
-    expect(page).to have_content('TEC15')
-    expect(page).to have_link('Voltar')
-  end
-
-  scenario 'and return to categories page' do
-    category = Category.create!(name: 'Tecnologia', code: 'TEC15')
-
-    visit root_path
-    click_on 'Categorias'
-    click_on category.name
-    click_on 'Voltar'
-
-    expect(current_path).to eq(categories_path)
-  end
-
 end
