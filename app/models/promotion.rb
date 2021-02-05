@@ -19,6 +19,6 @@ class Promotion < ApplicationRecord
   end
 end
 
-# Método de instância - roda em cima de promotion
+# Método de instância - roda em um objecto, por exemplo em cima de promotion
 # @promotion.create
 # @promotion.new

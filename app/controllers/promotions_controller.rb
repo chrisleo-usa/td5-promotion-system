@@ -42,7 +42,7 @@ class PromotionsController < ApplicationController
     @promotion = Promotion.find(params[:id])
 
     @promotion.generate_coupons!
-    flash[:notice] = 'Cupons gerados com sucesso'
+    flash[:notice] = t('.success')
     redirect_to @promotion
   end
 end

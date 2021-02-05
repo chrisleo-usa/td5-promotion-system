@@ -46,7 +46,7 @@ describe Promotion do
   end
 
   # context é um alias para describe. context fala que todos os scenários fazem parte deste contexto
-  # com # quer dizer que é metodo de instância. Com ponto (.) é método de 
+  # com # quer dizer que é metodo de instância. Com ponto (.) é método de classe
   context '#generate_coupons!' do 
     it 'generate coupons of coupon_quantity' do
       promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
