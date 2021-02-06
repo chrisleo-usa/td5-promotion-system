@@ -7,6 +7,9 @@ pt-BR:
       category:
         one: Categoria
         other: Categorias
+      user:
+        one: Usuário
+        other: Usuários
     attributes: 
       promotion: 
         name: "Nome"
@@ -18,3 +21,6 @@ pt-BR:
       category:
         name: "Nome"
         code: "Código"
+      user:
+        email: "Email"
+        password: "Senha"
