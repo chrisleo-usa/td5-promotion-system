@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :promotions, only: [:index, :show, :new, :create] do 
+  resources :promotions, only: [:index, :show, :new, :create, :edit, :update] do 
     post 'generate_coupons', on: :member  #mesma coisa do código abaixo, mas este é o jeito Padrão
   end
 

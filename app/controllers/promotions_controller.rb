@@ -41,6 +41,25 @@ class PromotionsController < ApplicationController
     end
   end
 
+  def edit
+    @promotion = Promotion.find(params[:id])
+  end
+
+  def update
+    @promtion = Promotion.find(params[:id])
+
+    promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
+
+    @promotion = Promotion.new(promotion_params)
+    @promotion.user = current_user
+
+    if @promotion.update(promotion_params)
+      redirect_to @promotion
+    else
+      render :edit
+    end
+  end
+
   def generate_coupons
     @promotion = Promotion.find(params[:id])
 

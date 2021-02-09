@@ -5,7 +5,7 @@ feature 'Admin update informations' do
     visit root_path
     click_on 'Categorias'
 
-    expect(current_path). to eq(new_user_session_path)
+    expect(current_path).to eq(new_user_session_path)
   end
 
   scenario 'attributes cannot be blank' do
