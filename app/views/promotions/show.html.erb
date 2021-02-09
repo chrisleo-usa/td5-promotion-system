@@ -4,6 +4,7 @@
 <%= link_to 'Voltar', promotions_path %>
 
 <%= @promotion.name %>
+<span>Cadastrada por: <%= @promotion.user.email %></span>
 <dl>
   <dt>Descrição</dt>
   <dd><%= @promotion.description %></dd>

@@ -1,8 +1,17 @@
 require 'rails_helper'
 
 feature 'Admin view categories' do
+  scenario 'must be signed in' do
+    visit root_path
+    click_on 'Categorias'
+
+    expect(current_path). to eq(new_user_session_path)
+  end
 
   scenario 'and no category are created' do
+    user = User.create(email: 'joao@email.com', password: '123456')
+
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
 
@@ -10,9 +19,11 @@ feature 'Admin view categories' do
   end
 
   scenario 'succesfully' do
+    user = User.create(email: 'joao@email.com', password: '123456')
     Category.create!(name: 'Tecnologia', code: 'TEC15')
     Category.create!(name: 'Pizza', code: 'PIZZA30')
 
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
 
@@ -21,8 +32,10 @@ feature 'Admin view categories' do
   end
 
   scenario 'and view details' do
+    user = User.create(email: 'joao@email.com', password: '123456')
     category = Category.create!(name: 'Tecnologia', code: 'TEC15')
 
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
     click_on category.name
@@ -32,8 +45,10 @@ feature 'Admin view categories' do
   end
 
   scenario 'and return to categories page' do
+    user = User.create(email: 'joao@email.com', password: '123456')
     Category.create!(name: 'Tecnologia', code: 'TEC15')
 
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
     click_on 'Tecnologia'
@@ -43,6 +58,9 @@ feature 'Admin view categories' do
   end
 
   scenario 'and return to home page' do
+    user = User.create(email: 'joao@email.com', password: '123456')
+
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
     click_on 'Voltar'

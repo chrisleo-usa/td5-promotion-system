@@ -1,4 +1,6 @@
 class PromotionsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @promotions = Promotion.all
     # Se não for expor a variável promotions para a view, então não usamos o @. Como queremos expor ela para a views, então é necessário o @promotions
@@ -27,6 +29,7 @@ class PromotionsController < ApplicationController
     # @promotion.expiration_date = params[:promotion][:expiration_date]
 
     @promotion = Promotion.new(promotion_params)
+    @promotion.user = current_user #Linha que vincula um objeto a um usuário
     if @promotion.save
       # Save faz 2 coisas
       #   1º - Executa todas validações configuradas no model

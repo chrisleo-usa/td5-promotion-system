@@ -1,5 +1,7 @@
 class Promotion < ApplicationRecord
   has_many :coupons
+  belongs_to :user 
+  #o belongs_to é para associarmos a tabela promotion com a tabela users através da foreign key. Então uma promoção pertence a um usuário. Como o usuário tem que existir primeiro para depois criar a promoção, temos que fazer uma migration com "rails g migration add_user_ref_to_promotion user:references"
 
   validates :name, :discount_rate, :code, :expiration_date, :coupon_quantity, presence: true
   validates :code, uniqueness: true

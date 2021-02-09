@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 feature 'Admin registers a category' do
+  scenario 'must be signed in' do
+    visit root_path
+    click_on 'Categorias'
+
+    expect(current_path). to eq(new_user_session_path)
+  end
+
   scenario 'from index page' do
+    user = User.create(email: 'joao@email.com', password: '123456')
+
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
 
@@ -9,6 +19,9 @@ feature 'Admin registers a category' do
   end
 
   scenario 'succesfully' do
+    user = User.create(email: 'joao@email.com', password: '123456')
+
+    login_as user, scope: :user
     visit root_path
     click_on 'Categorias'
     click_on 'Cadastrar categoria'
@@ -20,6 +33,5 @@ feature 'Admin registers a category' do
     expect(current_path).to eq(category_path(Category.last))
     expect(page).to have_content('Tecnologia')
     expect(page).to have_content('TEC15')
-
   end
 end

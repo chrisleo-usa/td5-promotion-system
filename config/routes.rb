@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     post 'disable', on: :member
   end
 
-  resources :categories, only: [:index, :new, :create, :show]
+  resources :categories, only: [:index, :new, :create, :show, :edit, :update]
   # post '/promotions/:id/generate', to: 'promotions#generate_coupons'
 end
