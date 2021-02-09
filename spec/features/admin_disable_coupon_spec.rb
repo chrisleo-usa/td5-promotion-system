@@ -9,7 +9,7 @@ feature 'admin disable coupon' do
   end
   
   scenario 'successfully' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
       code: 'NATAL10', discount_rate: 10, coupon_quantity: 1,
       expiration_date: '22/12/2033', user: user)
@@ -28,7 +28,7 @@ feature 'admin disable coupon' do
   end
 
   scenario 'does not view button' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
       code: 'NATAL10', discount_rate: 10, coupon_quantity: 1,
       expiration_date: '22/12/2033', user: user)

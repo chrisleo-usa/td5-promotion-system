@@ -9,7 +9,7 @@ feature 'Admin registers a valid category' do
   end
 
   scenario 'and attributes cannot be blank' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
 
     login_as user, scope: :user
     visit root_path 
@@ -26,7 +26,7 @@ feature 'Admin registers a valid category' do
   end
 
   scenario 'and code must be unique' do 
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
 
     Category.create!(name: 'Tecnologia', code: 'TEC15')
 

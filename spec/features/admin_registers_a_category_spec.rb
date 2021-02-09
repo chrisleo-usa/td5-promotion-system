@@ -9,7 +9,7 @@ feature 'Admin registers a category' do
   end
 
   scenario 'from index page' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
 
     login_as user, scope: :user
     visit root_path
@@ -19,7 +19,7 @@ feature 'Admin registers a category' do
   end
 
   scenario 'succesfully' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
 
     login_as user, scope: :user
     visit root_path

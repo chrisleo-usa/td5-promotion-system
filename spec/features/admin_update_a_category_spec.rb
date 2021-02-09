@@ -9,7 +9,7 @@ feature 'Admin update informations' do
   end
 
   scenario 'attributes cannot be blank' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
     Category.create!(name: 'Tecnologia', code: 'TEC15')
 
     login_as user, scope: :user
@@ -28,7 +28,7 @@ feature 'Admin update informations' do
   end
 
   scenario 'sucessfully' do
-    user = User.create(email: 'joao@email.com', password: '123456')
+    user = User.create!(email: 'joao@email.com', password: '123456')
     Category.create!(name: 'Tecnologia', code: 'TEC15')
 
     login_as user, scope: :user
