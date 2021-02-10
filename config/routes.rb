@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :coupons, only: [] do
-    post 'disable', on: :member
+    member do 
+      post 'disable'
+      post 'enable'
+    end
   end
 
   resources :categories, only: [:index, :new, :create, :show, :edit, :update]

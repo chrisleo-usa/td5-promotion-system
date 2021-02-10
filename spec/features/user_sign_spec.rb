@@ -12,7 +12,6 @@ feature 'User sign in' do
       click_on 'Entrar'
     end
 
-
     expect(page).to have_content user.email
     expect(page).to have_content 'Login efetuado com sucesso'
     expect(page).to have_link 'Sair'
