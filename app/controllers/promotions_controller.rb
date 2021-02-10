@@ -4,7 +4,8 @@ class PromotionsController < ApplicationController
   def index
     @promotions = Promotion.all
     # Se não for expor a variável promotions para a view, então não usamos o @. Como queremos expor ela para a views, então é necessário o @promotions
-
+    # OBS: Toda Rota que for get, automaticamente dá render na view no final, e toda rota diferente de get, se não tiver nada dentro do método o Rails para a execução. Como o current_path fica observando a barra de endereço, se chamado um método e não tiver nada dentro dele e for diferente de GET, a rota será o próprio método que não fez nada. Ex: Chamou método Approve e ele está vazio, a rota ficará "/promotions/1/approve", pois ele parou de executar a aplicação no método approve.
+    
   end
 
   def show
@@ -60,11 +61,23 @@ class PromotionsController < ApplicationController
     end
   end
 
+  def destroy
+    @promotion = Promotion.find(params[:id])
+    @promotion.destroy
+
+    redirect_to promotions_path
+  end
+
   def generate_coupons
     @promotion = Promotion.find(params[:id])
-
     @promotion.generate_coupons!
-    flash[:notice] = t('.success')
-    redirect_to @promotion
+    redirect_to @promotion, notice: t('.success')
+  end
+
+  def approve
+    promotion = Promotion.find(params[:id])
+    promotion.approve!(current_user)
+
+    redirect_to promotion
   end
 end

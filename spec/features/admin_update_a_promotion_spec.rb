@@ -55,6 +55,7 @@ feature 'Admin update promotions informations' do
     fill_in 'Data de término', with: '20/01/2025'
     click_on 'Salvar'
 
+    promotion.reload
     expect(page).to have_content('TreinaDev')
     expect(page).to have_content('Black Friday TreinaDev')
     expect(page).to have_content('TD50')

@@ -29,7 +29,7 @@ feature 'Admin update informations' do
 
   scenario 'sucessfully' do
     user = User.create!(email: 'joao@email.com', password: '123456')
-    Category.create!(name: 'Tecnologia', code: 'TEC15')
+    category = Category.create!(name: 'Tecnologia', code: 'TEC15')
 
     login_as user, scope: :user
     visit root_path
@@ -40,6 +40,7 @@ feature 'Admin update informations' do
     fill_in 'Código', with: 'FOOD15'
     click_on 'Salvar'
 
+    category.reload
     expect(page).not_to have_content('Tecnologia')
     expect(page).not_to have_content('TEC15')
     expect(page).to have_content('Comida')

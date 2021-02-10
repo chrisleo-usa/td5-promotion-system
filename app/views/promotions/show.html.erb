@@ -1,8 +1,9 @@
 <h1>Detalhes da promoção</h1>
 
 <%= flash[:notice] %>
-<%= link_to 'Editar', edit_promotion_path %>
 <%= link_to 'Voltar', promotions_path %>
+<%= link_to 'Editar', edit_promotion_path %>
+<%= link_to 'Deletar', promotion_path(@promotion), method: :delete %>
 
 <%= @promotion.name %>
 <span>Cadastrada por: <%= @promotion.user.email %></span>
@@ -21,7 +22,16 @@
 
   <dt>Quantidade de cupons</dt>
   <dd><%= @promotion.coupon_quantity %></dd>
+
+  <% if @promotion.approved? %>
+    <p>Status: <span>Aprovada</span> </p>
+  <% end%>
 </dl>
+
+<%# unless é a mesma coisa que if not %>
+<% unless current_user == @promotion.user %>
+  <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
+<% end %>
 
 <%= link_to 'Gerar cupons', generate_coupons_promotion_path(@promotion), method: :post %>
 
