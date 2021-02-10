@@ -1,0 +1,13 @@
+<h1>Resultados da busca</h1>
+
+<% if @promotions.any? %>
+<ul>
+  <% @promotions.each do |promotion|%>
+    <li><%= promotion.name %> - <%= promotion.description %></li>
+  <% end %>
+</ul>
+<% else %>
+  <h3>Promoção não encontrada</h3>
+<% end %>
+
+<%= link_to 'Voltar', root_path %>
