@@ -12,12 +12,4 @@
   </div>
 <% end %>
 
-<%= form_with model: @category do |category| %>
-  <%= category.label :name %>
-  <%= category.text_field :name %>
-
-  <%= category.label :code %>
-  <%= category.text_field :code %>
-
-  <%= category.submit 'Salvar' %>
-<% end %>
+<%= render 'partials/categories/form' %>

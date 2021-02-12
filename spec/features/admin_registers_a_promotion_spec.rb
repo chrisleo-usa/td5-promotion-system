@@ -32,7 +32,7 @@ feature 'Admin registers a promotion' do
     fill_in 'Desconto', with: '15'
     fill_in 'Quantidade de cupons', with: '90'
     fill_in 'Data de término', with: '22/12/2033'
-    click_on 'Criar promoção'
+    click_on 'Criar'
 
     expect(current_path).to eq(promotion_path(Promotion.last))
     expect(page).to have_content('Cyber Monday')
@@ -65,7 +65,7 @@ feature 'Admin registers a promotion' do
     check 'Smartphones'
     check 'Jogos'
     check 'Monitores'
-    click_on 'Criar promoção'
+    click_on 'Criar'
 
     promotion = Promotion.last
     expect(current_path).to eq(promotion_path(promotion))

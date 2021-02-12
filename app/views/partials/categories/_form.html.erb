@@ -1,0 +1,14 @@
+<%= form_with model: @category do |category| %>
+  <%= category.label :name %>
+  <%= category.text_field :name %>
+
+  <%= category.label :code %>
+  <%= category.text_field :code %>
+
+  <% if current_page?(new_category_path) %>
+    <%= render 'components/new_button', f: category %>
+  <% else %>
+    <%= render 'components/edit_button', f: category %>
+  <% end %>
+  <%# <%= category.submit 'Criar categoria' %>
+<% end %>

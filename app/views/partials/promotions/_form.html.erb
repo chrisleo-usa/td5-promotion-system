@@ -1,0 +1,43 @@
+<%= form_with(model: @promotion) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+
+  <div>
+    <%= f.label :discount_rate %>
+    <%= f.text_field :discount_rate %>
+  </div>
+
+  <div>
+    <%= f.label :coupon_quantity %>
+    <%= f.text_field :coupon_quantity %>
+  </div>
+
+  <div>
+    <%= f.label :expiration_date %>
+    <%= f.text_field :expiration_date %>
+  </div>
+
+  <div>
+    <%= f.collection_check_boxes :category_ids, @categories, :id, :name %>
+    <%# Quando montamos a coleção de checkboxs precisamos dizer o nome que queremos lá do outro lado para o controller (:category_ids), a coleção que queremos utilizar para montar os checkbox (Category.all) - não é necessário loop, o Rails fará isso sozinho - e para cada item ele irá criar um checkbox com id (:id) e name (:name) %>
+  </div>
+
+  <% if current_page?(new_promotion_path) %>
+    <%= render 'components/new_button', f: f %>
+  <% else %>
+    <%= render 'components/edit_button', f: f %>
+  <% end %>
+
+<% end %>

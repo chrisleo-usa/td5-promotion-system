@@ -17,7 +17,7 @@ feature 'Admin registers a valid category' do
     click_on 'Cadastrar categoria'
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
-    click_on 'Criar categoria'
+    click_on 'Criar'
 
     expect(Category.count).to eq 0
     expect(page).to have_content('Não foi possível criar a categoria')
@@ -35,7 +35,7 @@ feature 'Admin registers a valid category' do
     click_on 'Categorias'
     click_on 'Cadastrar categoria'
     fill_in 'Código', with: 'TEC15'
-    click_on 'Criar categoria'
+    click_on 'Criar'
 
     expect(page).to have_content('Código já está em uso')
   end

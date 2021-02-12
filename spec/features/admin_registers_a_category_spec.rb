@@ -28,7 +28,7 @@ feature 'Admin registers a category' do
 
     fill_in 'Nome', with: 'Tecnologia'
     fill_in 'Código', with: 'TEC15'
-    click_on 'Criar categoria'
+    click_on 'Criar'
 
     expect(current_path).to eq(category_path(Category.last))
     expect(page).to have_content('Tecnologia')
