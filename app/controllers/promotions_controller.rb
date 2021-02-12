@@ -5,7 +5,6 @@ class PromotionsController < ApplicationController
     @promotions = Promotion.all
     # Se não for expor a variável promotions para a view, então não usamos o @. Como queremos expor ela para a views, então é necessário o @promotions
     # OBS: Toda Rota que for get, automaticamente dá render na view no final, e toda rota diferente de get, se não tiver nada dentro do método o Rails para a execução. Como o current_path fica observando a barra de endereço, se chamado um método e não tiver nada dentro dele e for diferente de GET, a rota será o próprio método que não fez nada. Ex: Chamou método Approve e ele está vazio, a rota ficará "/promotions/1/approve", pois ele parou de executar a aplicação no método approve.
-    
   end
 
   def show
@@ -15,11 +14,13 @@ class PromotionsController < ApplicationController
 
   def new
     @promotion = Promotion.new
+    @categories = Category.all
   end
 
   def create
     # Strong Parameters abaixo
-    promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
+    promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date, category_ids: [])
+    # Os que parâmetros que são normais vão primeiro e no final vão os que são arrays. 
 
     # Melhorar este código com parâmetros fortes, está no guia rails 
     # @promotion.name = params[:promotion][:name]
@@ -30,6 +31,7 @@ class PromotionsController < ApplicationController
     # @promotion.expiration_date = params[:promotion][:expiration_date]
 
     @promotion = Promotion.new(promotion_params)
+
     @promotion.user = current_user #Linha que vincula um objeto a um usuário
     if @promotion.save
       # Save faz 2 coisas
@@ -38,16 +40,19 @@ class PromotionsController < ApplicationController
       #   Se tudo Ok -> true
       redirect_to @promotion
     else
+      @categories = Category.all
       render 'new'
+      # Toda vez que for renderizar o new, será necessário ter a variável @categories, para que apareçam os checkboxs
     end
   end
 
   def edit
     @promotion = Promotion.find(params[:id])
+    @categories = Category.all
   end
 
   def update
-    @promtion = Promotion.find(params[:id])
+    @promotion = Promotion.find(params[:id])
 
     promotion_params = params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)
 
@@ -57,6 +62,7 @@ class PromotionsController < ApplicationController
     if @promotion.update(promotion_params)
       redirect_to @promotion
     else
+      @categories = Category.all
       render :edit
     end
   end

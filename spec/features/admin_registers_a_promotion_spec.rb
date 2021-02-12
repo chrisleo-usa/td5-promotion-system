@@ -72,6 +72,6 @@ feature 'Admin registers a promotion' do
     expect(page).to have_content('Smartphones')
     expect(page).to have_content('Jogos')
     expect(page).to have_content('Monitores')
-    expect(page).not_to have_content('Monitores')
+    expect(page).not_to have_content('Webcams')
   end
 end

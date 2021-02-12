@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_125222) do
+ActiveRecord::Schema.define(version: 2021_02_11_150051) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "category_promotions", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "promotion_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_category_promotions_on_category_id"
+    t.index ["promotion_id"], name: "index_category_promotions_on_promotion_id"
   end
 
   create_table "coupons", force: :cascade do |t|
@@ -63,6 +72,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_125222) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "category_promotions", "categories"
+  add_foreign_key "category_promotions", "promotions"
   add_foreign_key "coupons", "promotions"
   add_foreign_key "promotion_approvals", "promotions"
   add_foreign_key "promotion_approvals", "users"

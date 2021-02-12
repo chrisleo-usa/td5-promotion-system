@@ -44,7 +44,8 @@
   </div>
 
   <div>
-    <%= f.collection_check_boxes :product_category_ids, Category.all, :id, :name %>
+    <%= f.collection_check_boxes :category_ids, @categories, :id, :name %>
+    <%# Quando montamos a coleção de checkboxs precisamos dizer o nome que queremos lá do outro lado para o controller (:category_ids), a coleção que queremos utilizar para montar os checkbox (Category.all) - não é necessário loop, o Rails fará isso sozinho - e para cada item ele irá criar um checkbox com id (:id) e name (:name) %>
   </div>
 
   <%= f.submit 'Criar promoção' %>

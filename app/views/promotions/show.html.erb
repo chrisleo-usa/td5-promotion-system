@@ -28,6 +28,12 @@
   <% end%>
 </dl>
 
+<h2>Categorias de Produtos</h2>
+
+<% @promotion.categories.each do |category| %>
+  <%= category.name %> - <%= category.code %>
+<% end %>
+
 <%# unless é a mesma coisa que if not %>
 <% unless current_user == @promotion.user %>
   <%= link_to 'Aprovar Promoção', approve_promotion_path, method: :post %>
