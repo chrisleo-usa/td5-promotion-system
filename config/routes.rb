@@ -20,6 +20,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace 'api' do
+    namespace 'v1' do
+      resources :coupons, only: [:show], defaults: {format: :json}
+    end
+  end
+
   resources :categories, only: [:index, :new, :create, :show, :edit, :update]
   # post '/promotions/:id/generate', to: 'promotions#generate_coupons'
+
 end
